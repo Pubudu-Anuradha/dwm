@@ -1,5 +1,11 @@
 #!/bin/bash
 # https://wiki.archlinux.org/title/Dwm#Restart_dwm
+
+# Autostart Items
+picom -b # Compositor
+
+
+
 csum=""
 new_csum=$(sha1sum $(which dwm))
 while true
