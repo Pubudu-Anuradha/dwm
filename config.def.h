@@ -4,8 +4,8 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
-static const unsigned int snap      = 32;       /* snap pixel */
+static const Gap default_gap        = {.isgap = 1, .realgap = 5, .gappx = 5};
+static const unsigned int snap      = 16;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -92,6 +92,8 @@ static const Key keys[] = {
 	{ 0,         XF86XK_AudioStop,             spawn,          SHCMD("playerctl stop") },
 	{ 0,         XF86XK_AudioMute,             spawn,          SHCMD("volumectl toggle-mute") },
 	{ 0,         XF86XK_AudioMicMute,          spawn,          SHCMD("volumectl -m toggle-mute") },
+	{ 0,         XK_Print,                     spawn,          SHCMD("flameshot gui") },
+	{ MODKEY,    XK_Print,                     spawn,          SHCMD("flameshot screen") },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
