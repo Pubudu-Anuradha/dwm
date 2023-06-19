@@ -3,8 +3,9 @@
 
 # Autostart Items
 picom -b # Compositor
-
-
+nm-applet --indicator &
+xfce4-power-manager &
+copyq --start-server
 
 csum=""
 new_csum=$(sha1sum $(which dwm))
@@ -13,6 +14,7 @@ do
     if [ "$csum" != "$new_csum" ]
     then
         csum=$new_csum
+	nitrogen --restore
         dwm
     else
         exit 0
