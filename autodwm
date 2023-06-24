@@ -3,15 +3,18 @@
 
 # Autostart Items
 picom -b # Compositor
+darkman set dark
 
 csum=""
 new_csum=$(sha1sum $(which dwm))
 while true
 do
-    if [ "$csum" != "$new_csum" ]
+	if [ "$csum" != "$new_csum" ]
     then
         csum=$new_csum
+	xrandr=$new_xrandr
 	pasystray &
+	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1600x0 --rotate normal --output HDMI-1 --auto --mode 1600x900 --pos 0x0 --rotate normal
 	nitrogen --restore
 	nm-applet --indicator &
 	xfce4-power-manager &
