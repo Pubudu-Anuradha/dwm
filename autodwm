@@ -4,6 +4,7 @@
 # Autostart Items
 picom -b # Compositor
 darkman set dark
+ibus-daemon -rxRd
 
 csum=""
 new_csum=$(sha1sum $(which dwm))
@@ -12,13 +13,13 @@ do
 	if [ "$csum" != "$new_csum" ]
     then
         csum=$new_csum
-	xrandr=$new_xrandr
-	pasystray &
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1600x0 --rotate normal --output HDMI-1 --auto --mode 1600x900 --pos 0x0 --rotate normal
-	nitrogen --restore
-	nm-applet --indicator &
-	xfce4-power-manager &
-	copyq --start-server
+        (conky | dwm-setstatus) &
+        pasystray &
+        xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1600x0 --rotate normal --output HDMI-1 --auto --mode 1600x900 --pos 0x0 --rotate normal
+        nitrogen --restore
+        nm-applet --indicator &
+        xfce4-power-manager &
+        copyq --start-server
         dwm
     else
         exit 0

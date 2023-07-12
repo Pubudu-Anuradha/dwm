@@ -26,7 +26,7 @@ dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
 clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz dwm-setstatus
 
 dist: clean
 	mkdir -p dwm-${VERSION}
@@ -37,9 +37,10 @@ dist: clean
 	rm -rf dwm-${VERSION}
 
 install: all
+	gcc dwm-setstatus.c -lX11 -o dwm-setstatus
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	mkdir -p ${DESTDIR}${PREFIX}/share/xsessions
-	cp -f dwm autodwm ${DESTDIR}${PREFIX}/bin
+	cp -f dwm autodwm dwm-setstatus ${DESTDIR}${PREFIX}/bin
 	cp -f dwm.desktop ${DESTDIR}${PREFIX}/share/xsessions/dwm.desktop
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
 	chmod 755 ${DESTDIR}${PREFIX}/bin/autodwm
@@ -49,6 +50,6 @@ install: all
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
-		${DESTDIR}${MANPREFIX}/man1/dwm.1
+		${DESTDIR}${MANPREFIX}/man1/dwm.1 dwm-setstatus
 
 .PHONY: all options clean dist install uninstall
